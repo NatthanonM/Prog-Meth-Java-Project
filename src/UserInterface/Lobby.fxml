@@ -10,42 +10,48 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.Group?>
 
-<Group xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserInterface.Lobby">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="UserInterface.Lobby">
 	<children>
-		<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
+		<Pane maxHeight="-Infinity" maxWidth="-Infinity"
+			minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+			prefWidth="800.0">
 			<children>
-				<ImageView fx:id="background" fitHeight="600.0" layoutX="-125.0" preserveRatio="true">
+				<ImageView fx:id="background" fitHeight="600.0"
+					preserveRatio="true">
 					<image>
 						<Image url="@../../res/images/forest.png" />
 					</image>
 				</ImageView>
 			</children>
-			<rotationAxis>
-				<Point3D />
-			</rotationAxis>
 		</Pane>
-		<VBox alignment="CENTER" layoutX="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" spacing="100.0">
+		<VBox alignment="CENTER" layoutX="100.0" maxHeight="-Infinity"
+			maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+			prefHeight="600.0" prefWidth="600.0" spacing="100.0">
 			<children>
-				<Label fx:id="gameName" alignment="CENTER" text="Game Name" textAlignment="CENTER" textFill="#110090">
+				<Label fx:id="gameName" alignment="CENTER" text="Game Name"
+					textAlignment="CENTER" textFill="#110090">
 					<font>
 						<Font size="96.0" />
 					</font>
 				</Label>
-				<Label fx:id="gameStart" alignment="CENTER" onMouseClicked="#onMouseClick" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" text="click to start!!!" textAlignment="CENTER" textFill="#00ffad">
+				<Label fx:id="gameStart" alignment="CENTER"
+					onMouseClicked="#onMouseClick" onMouseEntered="#onMouseEntered"
+					onMouseExited="#onMouseExited" text="click to start!!!"
+					textAlignment="CENTER" textFill="#00ffad">
 					<font>
 						<Font size="40.0" />
 					</font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
+					<opaqueInsets>
+						<Insets />
+					</opaqueInsets>
+					<cursor>
+						<Cursor fx:constant="HAND" />
+					</cursor>
 				</Label>
 			</children>
 		</VBox>
 	</children>
-	<rotationAxis>
-		<Point3D />
-	</rotationAxis>
-</Group>
+</Pane>
