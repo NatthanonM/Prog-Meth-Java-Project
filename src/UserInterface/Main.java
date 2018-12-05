@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	protected static Stage stage;
 	protected static ScreenController screenController;
+	protected static Map map;
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -17,9 +18,10 @@ public class Main extends Application {
 		Pane root = FXMLLoader.load(getClass().getResource("Lobby.fxml"));
 		primaryStage.setScene(new Scene(root));
 
-		Main.screenController = new ScreenController();
+		screenController = new ScreenController();
 		screenController.addScreen("HeroSelection", FXMLLoader.load(getClass().getResource("HeroSelection.fxml")));
 		screenController.addScreen("Map", FXMLLoader.load(getClass().getResource("Map.fxml")));
+		map = new Map();
 
 		//////////////////////////////////////////
 		primaryStage.setTitle("Monster Defeated");
