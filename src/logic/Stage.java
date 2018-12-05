@@ -3,10 +3,11 @@ package logic;
 import java.util.ArrayList;
 
 public class Stage {
-	public static Stage instance = new Stage();
 	private ArrayList<Character> monsters;
 	private int stage;
-	public Stage() {
+	private boolean clear;
+
+	public Stage(int stage) {
 		monsters = new ArrayList<Character>();
 		if(stage==1) {
 			Character slime1 = new Character("Slime",100,4);
@@ -115,5 +116,17 @@ public class Stage {
 			monsters.add(dragon);
 		}
 		
+	}
+
+	public int getStage() {
+		return stage;
+	}
+
+	public boolean isClear() {
+		return clear;
+	}
+
+	public void setClear(boolean clear) {
+		this.clear = clear;
 	}
 }
