@@ -96,11 +96,11 @@ public class Stage {
 			monsters.add(devil);
 		}else if(stage==13) {
 			Monster devil = new Monster("Devil",220,18);
-			Monster crocodian1 = new Monster("Crocodian",250,20);
-			Monster crocodian2 = new Monster("Crocodian",250,20);
+			Monster lizardMan1 = new Monster("LizardMan",250,20);
+			Monster lizardMan2 = new Monster("LizardMan",250,20);
 			monsters.add(devil);
-			monsters.add(crocodian1);
-			monsters.add(crocodian2);
+			monsters.add(lizardMan1);
+			monsters.add(lizardMan2);
 		}else if (stage==14) {
 			Monster golem1 = new Monster("Golem",300,15);
 			Monster golem2 = new Monster("Golem",300,15);
