@@ -1,28 +1,31 @@
 package logic;
 
-public abstract class Hero extends Character implements UseItem {
+public abstract class Hero extends Character implements UseItem, Attackable {
 	private int mana;
-	public Hero(String name,int maxHP,int power,int mana){
-		super(name,maxHP,power);
-		this.mana=mana;
+
+	public Hero(String name, int maxHP, int power, int mana) {
+		super(name, maxHP, power);
+		this.mana = mana;
 	}
+
 	public boolean useItem(String item) {
-		if(isDead(this)) return false;
-		if(item == "Red Potion") {
-			this.setHealth(getHealth()+50);
+		if (isDead(this))
+			return false;
+		if (item == "Red Potion") {
+			this.setHealth(getHealth() + 50);
 			return true;
 		}
-		if(item == "Blue Potion") {
-			this.setMana(getMana()+50);
+		if (item == "Blue Potion") {
+			this.setMana(getMana() + 50);
 			return true;
 		}
-		if(item == "Green Potion") {
-			this.setPower(getPower()+5);
+		if (item == "Green Potion") {
+			this.setPower(getPower() + 5);
 			return true;
 		}
 		return false;
 	}
-	
+
 	public int getMana() {
 		return mana;
 	}
@@ -30,5 +33,6 @@ public abstract class Hero extends Character implements UseItem {
 	public void setMana(int mana) {
 		this.mana = mana;
 	}
-	public abstract void useSkill(Character monster);
+
+	public abstract boolean useSkill(String skill, Character monster);
 }

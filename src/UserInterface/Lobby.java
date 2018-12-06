@@ -1,11 +1,17 @@
 package UserInterface;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 
-public class Lobby {
+public class Lobby implements Initializable {
 
 	@FXML
 	private Label gameName;
@@ -26,6 +32,11 @@ public class Lobby {
 
 	@FXML
 	private void onMouseClick() throws IOException {
-		Main.screenController.activate("HeroSelection");
+		Pane scene = FXMLLoader.load(getClass().getResource("HeroSelection.fxml"));
+		Main.stage.setScene(new Scene(scene));
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
 	}
 }

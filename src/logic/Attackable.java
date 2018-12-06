@@ -1,5 +1,5 @@
 package logic;
 
-public interface Attack {
+public interface Attackable {
 	public boolean attack(Character c);
 }

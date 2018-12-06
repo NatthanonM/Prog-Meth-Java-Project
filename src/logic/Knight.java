@@ -1,6 +1,6 @@
 package logic;
 
-public abstract class Knight extends Hero {
+public class Knight extends Hero {
 	private String skill1;
 	private String skill2;
 
@@ -10,15 +10,16 @@ public abstract class Knight extends Hero {
 		this.skill2 = skill2;
 	}
 	
+	@Override
 	public boolean useSkill(String skill,Character monster) {
 		if(isDead(this)) return false;
 		if(skill==skill1) {
-			monster.takeDamage(10);
+			monster.takeDamage(20);
 			this.setMana(getMana()-10);
 			return true;
 		}
 		if(skill==skill2) {
-			monster.takeDamage(10);
+			monster.takeDamage(35);
 			this.setMana(getMana()-15);
 			return true;
 		}
