@@ -119,6 +119,10 @@ public class Stage {
 		
 	}
 
+	public ArrayList<Monster> getMonsters() {
+		return monsters;
+	}
+
 	public int getStage() {
 		return stage;
 	}

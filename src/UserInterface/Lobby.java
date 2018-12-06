@@ -5,13 +5,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 
-public class Lobby implements Initializable {
+public class Lobby implements Initializable, ControlledScreen {
+	
+	ScreensController myController;
 
 	@FXML
 	private Label gameName;
@@ -32,11 +31,15 @@ public class Lobby implements Initializable {
 
 	@FXML
 	private void onMouseClick() throws IOException {
-		Pane scene = FXMLLoader.load(getClass().getResource("HeroSelection.fxml"));
-		Main.stage.setScene(new Scene(scene));
+		myController.setScreen(Main.screen2ID);
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+	}
+
+	@Override
+	public void setScreenParent(ScreensController screenParent) {
+		myController = screenParent;
 	}
 }

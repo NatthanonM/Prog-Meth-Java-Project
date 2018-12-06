@@ -1,42 +1,44 @@
 package UserInterface;
 
-import java.io.IOException;
-import java.util.HashMap;
-
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import logic.GameManager;
 import logic.Hero;
 
 public class Main extends Application {
 	protected static Stage stage;
-	protected static HashMap<String, Pane> Screens = new HashMap<>();
 	protected static Map map;
 	protected static Hero hero;
 	protected static GameManager gameManager;
+		
+    public static String screen1ID = "Lobby";
+    public static String screen1File = "/FXML/Lobby.fxml";
+    public static String screen2ID = "HeroSelection";
+    public static String screen2File = "/FXML/HeroSelection.fxml";
+    public static String screen3ID = "Map";
+    public static String screen3File = "/FXML/Map.fxml";
+    public static String screen4ID = "BattleField";
+    public static String screen4File = "/FXML/BattleField.fxml";
 
 	@Override
-	public void start(Stage primaryStage) throws IOException {
+	public void start(Stage primaryStage){
 		map = new Map();
-		Main.stage = primaryStage;
-		Pane root = FXMLLoader.load(getClass().getResource("Lobby.fxml"));
-		primaryStage.setScene(new Scene(root));
-		
-		/*FXMLLoader HeroSelection = new FXMLLoader(getClass().getResource("/UserInterface/HeroSelection.fxml"));
-		Screens.put("HeroSelection", (Pane) HeroSelection.load());*/
-		
-		/*FXMLLoader Map = new FXMLLoader(getClass().getResource("/UserInterface/Map.fxml"));
-		MapUpdate display = Map.getController();
-		display.update();
-		Screens.put("Map", (Pane) Map.load()); */ 
-		
-		/*FXMLLoader BattleField = new FXMLLoader(getClass().getResource("/UserInterface/BattleField.fxml"));
-		BattleField.setController(this);
-		Screens.put("HeroSelection", (Pane) BattleField.load());*/
-		
+		Map.initElement();
+		gameManager = new GameManager();
+		ScreensController mainContainer = new ScreensController();
+        mainContainer.loadScreen(Main.screen1ID, Main.screen1File);
+        mainContainer.loadScreen(Main.screen2ID, Main.screen2File);
+        mainContainer.loadScreen(Main.screen3ID, Main.screen3File);
+        mainContainer.loadScreen(Main.screen4ID, Main.screen4File);
+        
+        mainContainer.setScreen(Main.screen1ID);
+        
+        Group root = new Group();
+        root.getChildren().addAll(mainContainer);
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
 
 		//////////////////////////////////////////
 		primaryStage.setTitle("Monster Defeated");

@@ -5,16 +5,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import logic.Knight;
 import logic.Mage;
 
-public class HeroSelection implements Initializable {
+public class HeroSelection implements Initializable, ControlledScreen {
+	
+	ScreensController myController;
+	
 	@FXML
 	private Label knightText;
 	
@@ -62,21 +62,23 @@ public class HeroSelection implements Initializable {
 	@FXML
 	private void onKnightMouseClick() throws IOException {
 		Main.hero = new Knight("Knight", 100, 10, 100, "Skill 1", "Skill 2");
-		FXMLLoader map = new FXMLLoader(getClass().getResource("/UserInterface/Map.fxml"));
-		Pane pane = (Pane) map.load();
-		Main.stage.setScene(new Scene(pane));
+		Map.getInstance().update();
+		myController.setScreen(Main.screen3ID);
 	}
 	
 	@FXML
 	private void onMageMouseClick() throws IOException {
 		Main.hero = new Mage("Mage", 100, 10, 100, "Skill 1", "Skill 2");
-		FXMLLoader map = new FXMLLoader(getClass().getResource("/UserInterface/Map.fxml"));
-		Pane pane = (Pane) map.load();
-		Main.stage.setScene(new Scene(pane));
+		myController.setScreen(Main.screen3ID);
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+	}
+
+	@Override
+	public void setScreenParent(ScreensController screenParent) {
+		myController = screenParent;
 	}
 	
 }
