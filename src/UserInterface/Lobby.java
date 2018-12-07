@@ -1,45 +1,62 @@
 package UserInterface;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 
-public class Lobby implements Initializable, ControlledScreen {
+public class Lobby extends StackPane{
+
+	private Label gameName, gameStart;
+	private ImageView background;
 	
-	ScreensController myController;
-
-	@FXML
-	private Label gameName;
-
-	@FXML
-	private Label gameStart;
-
-	@FXML
-	private void onMouseEntered() {
-		gameStart.setText("Begin!!!");
-		gameStart.setMinWidth(gameStart.getWidth());
+	public Lobby() {
+		super();
+		Pane bg = new Pane();
+		background = new ImageView(new Image(ClassLoader.getSystemResource("images/forest.png").toString()));
+		bg.getChildren().add(background);
+		
+		VBox vbox = new VBox();
+		vbox.setAlignment(Pos.CENTER);
+		vbox.setSpacing(100);
+		
+		gameName = new Label();
+		gameName.setText("Monster Defeated");
+		gameName.setStyle("-fx-font-size: 84px");
+		gameName.setTextFill(Paint.valueOf("#00f6ff"));
+		gameName.setAlignment(Pos.CENTER);
+		
+		gameStart = new Label();
+		gameStart.setText("click here to start!!!");
+		gameStart.setStyle("-fx-font-size: 40px;");
+		gameStart.setTextFill(Paint.valueOf("#3fff00"));
+		gameStart.setAlignment(Pos.CENTER);
+		gameStart.setCursor(Cursor.HAND);
+		
+		vbox.getChildren().add(gameName);
+		vbox.getChildren().add(gameStart);
+		
+		gameStart.setOnMouseEntered(e -> {
+			gameStart.setText("Begin!!!");
+			gameStart.setMinWidth(gameStart.getWidth());
+		});
+		
+		gameStart.setOnMouseExited(e -> {
+			gameStart.setText("click to start!!!");
+		});
+		
+		gameStart.setOnMouseClicked(e -> {
+			this.setVisible(false);
+			Main.getHeroSelection().setVisible(true);
+		});
+		
+		this.getChildren().addAll(bg, vbox);
+		
 	}
-
-	@FXML
-	private void onMouseExited() {
-		gameStart.setText("click to start!!!");
-	}
-
-	@FXML
-	private void onMouseClick() throws IOException {
-		myController.setScreen(Main.screen2ID);
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-	}
-
-	@Override
-	public void setScreenParent(ScreensController screenParent) {
-		myController = screenParent;
-	}
+	
 }

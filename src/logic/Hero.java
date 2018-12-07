@@ -1,6 +1,6 @@
 package logic;
 
-public abstract class Hero extends Character implements UseItem, Attackable {
+public abstract class Hero extends Character {
 	private int mana;
 
 	public Hero(String name, int maxHP, int power, int mana) {

@@ -1,84 +1,86 @@
 package UserInterface;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import logic.GameManager;
 import logic.Knight;
 import logic.Mage;
 
-public class HeroSelection implements Initializable, ControlledScreen {
-	
-	ScreensController myController;
-	
-	@FXML
-	private Label knightText;
-	
-	@FXML
-	private Label mageText;
-	
-	@FXML
-	private ImageView knightPicture;
-	
-	@FXML
-	private ImageView magePicture;
+public class HeroSelection extends Pane {
 
-	@FXML
-	private void onKnightMouseEntered() {
-		knightPicture.setScaleX(1.1);
-		knightPicture.setScaleY(1.1);
-		knightPicture.setScaleZ(1.1);
-		knightPicture.setFitWidth(knightPicture.getFitWidth());
-		knightPicture.setFitHeight(knightPicture.getFitHeight());
-	}
+	private Pane knight, mage;
 
-	@FXML
-	private void onKnightMouseExited() {
-		knightPicture.setScaleX(1.0);
-		knightPicture.setScaleY(1.0);
-		knightPicture.setScaleZ(1.0);
-	}
-	
-	@FXML
-	private void onMageMouseEntered() {
-		magePicture.setScaleX(1.1);
-		magePicture.setScaleY(1.1);
-		magePicture.setScaleZ(1.1);
-		magePicture.setFitWidth(magePicture.getFitWidth());
-		magePicture.setFitHeight(magePicture.getFitHeight());
-	}
+	public HeroSelection() {
+		BorderPane bp = new BorderPane();
+		bp.setPrefSize(800, 600);
+		bp.setPadding(new Insets(50));
 
-	@FXML
-	private void onMageMouseExited() {
-		magePicture.setScaleX(1.0);
-		magePicture.setScaleY(1.0);
-		magePicture.setScaleZ(1.0);
+		Label s = new Label();
+		s.setText("Select your Hero");
+		s.setStyle("-fx-font-size: 64px;");
+		s.setPrefWidth(800);
+		s.setAlignment(Pos.CENTER);
+
+		GridPane gp = new GridPane();
+		gp.setAlignment(Pos.CENTER);
+		gp.setPrefSize(800, 800);
+		gp.setHgap(80);
+
+		knight = new Pane();
+		drawHeroPane(knight, "Knight");
+
+		mage = new Pane();
+		drawHeroPane(mage, "Mage");
+
+		gp.add(knight, 0, 0);
+		gp.add(mage, 1, 0);
+
+		bp.setTop(s);
+		bp.setCenter(gp);
+
+		this.getChildren().add(bp);
+		this.setVisible(false);
+		
+		knight.setOnMouseClicked(e->{
+			this.setVisible(false);
+			
+		});
+		
+		mage.setOnMouseClicked(e->{
+			this.setVisible(false);;
+		});
 	}
 
-	@FXML
-	private void onKnightMouseClick() throws IOException {
-		Main.hero = new Knight("Knight", 100, 10, 100, "Skill 1", "Skill 2");
-		Map.getInstance().update();
-		myController.setScreen(Main.screen3ID);
-	}
-	
-	@FXML
-	private void onMageMouseClick() throws IOException {
-		Main.hero = new Mage("Mage", 100, 10, 100, "Skill 1", "Skill 2");
-		myController.setScreen(Main.screen3ID);
+	private void drawHeroPane(Pane pane, String type) {
+		ImageView Pic = new ImageView(ClassLoader.getSystemResource("images/" + type + ".png").toString());
+		Label Text = new Label();
+		Text.setStyle("-fx-font-size: 48px;");
+		Text.setLayoutY(15);
+		if (type.equals("Knight")) {
+			pane.setPrefSize(200, 300);
+			Text.setText("Knight");
+			Text.setLayoutX(15);
+			Pic.setLayoutX(0);
+			Pic.setLayoutY(103);
+			Pic.setFitHeight(183);
+			Pic.setFitWidth(200);
+		} else {
+			pane.setPrefSize(150, 300);
+			Text.setText("Mage");
+			Text.setLayoutX(20);
+			Pic.setLayoutX(20);
+			Pic.setLayoutY(102);
+			Pic.setFitHeight(175);
+			Pic.setFitWidth(150);
+		}
+		pane.setCursor(Cursor.HAND);
+		pane.getChildren().addAll(Text, Pic);
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-	}
-
-	@Override
-	public void setScreenParent(ScreensController screenParent) {
-		myController = screenParent;
-	}
-	
 }

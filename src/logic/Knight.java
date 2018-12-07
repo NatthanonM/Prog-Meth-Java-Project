@@ -1,13 +1,13 @@
 package logic;
 
-public class Knight extends Hero {
+public class Knight extends Hero implements Attackable, UseItem{
 	private String skill1;
 	private String skill2;
 
-	public Knight(String name,int maxHP,int power,int mana,String skill1,String skill2) {
-		super(name,maxHP,power,mana);
-		this.skill1 = skill1;
-		this.skill2 = skill2;
+	public Knight() {
+		super("Knight",100,10,100);
+		this.skill1 = "KSkill1";
+		this.skill2 = "KSkill2";
 	}
 	
 	@Override
