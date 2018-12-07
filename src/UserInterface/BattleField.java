@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.omg.CORBA.portable.InputStream;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ProgressBar;
@@ -49,10 +51,13 @@ public class BattleField implements Initializable, ControlledScreen{
 	public void update() {
 		for( Monster m : Map.getStages(Main.gameManager.getCurrentState()).getMonsters() ) {
 			if(m.getName().equals("Slime")) {
-				monster1.setImage(new Image(ClassLoader.getSystemResource("images/Slime.png").toString()));
+				InputStream inStream = (InputStream) getClass().getResourceAsStream("images/Slime.png");
+				Image image = new Image(inStream);
+				monster1 = new ImageView(image);
 			}
 		}
-	}
+}
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
