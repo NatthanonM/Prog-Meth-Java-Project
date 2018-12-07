@@ -1,8 +1,26 @@
 package UserInterface;
 
+<<<<<<< HEAD
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+||||||| merged common ancestors
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+=======
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import org.omg.CORBA.portable.InputStream;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+>>>>>>> c5bb2b08e34937f00bfeb1f4d3196624d3e68464
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -116,6 +134,7 @@ public class BattleField extends Pane{
 		menu.getChildren().addAll(gp);
 		return menu;
 	}
+<<<<<<< HEAD
 
 	public void drawStatusPane(Pane pane, String text, ProgressBar pb) {
 		Label t = new Label();
@@ -136,9 +155,35 @@ public class BattleField extends Pane{
 			pb.setLayoutX(15);
 			pb.setLayoutY(-10);
 			pb.setStyle("-fx-accent : blue");
+||||||| merged common ancestors
+	
+	@FXML
+	public void update() {
+		for( Monster m : Map.getStages(Main.gameManager.getCurrentState()).getMonsters() ) {
+			if(m.getName().equals("Slime")) {
+				monster1.setImage(new Image(ClassLoader.getSystemResource("images/Slime.png").toString()));
+			}
+=======
+	
+	@FXML
+	public void update() {
+		for( Monster m : Map.getStages(Main.gameManager.getCurrentState()).getMonsters() ) {
+			if(m.getName().equals("Slime")) {
+				InputStream inStream = (InputStream) getClass().getResourceAsStream("images/Slime.png");
+				Image image = new Image(inStream);
+				monster1 = new ImageView(image);
+			}
+>>>>>>> c5bb2b08e34937f00bfeb1f4d3196624d3e68464
 		}
+<<<<<<< HEAD
 		pane.getChildren().addAll(pb, t);
 	}
+||||||| merged common ancestors
+	}
+=======
+}
+	
+>>>>>>> c5bb2b08e34937f00bfeb1f4d3196624d3e68464
 
 	public void drawMenuPane(Pane pane, String text) {
 		Label t = new Label();

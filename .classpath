@@ -2,6 +2,12 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
+<<<<<<< HEAD
 	<classpathentry kind="src" path="res"/>
+||||||| merged common ancestors
+	<classpathentry excluding="images/|gifs/" kind="src" path="res"/>
+=======
+	<classpathentry excluding="gifs/" kind="src" path="res"/>
+>>>>>>> c5bb2b08e34937f00bfeb1f4d3196624d3e68464
 	<classpathentry kind="output" path="bin"/>
 </classpath>
