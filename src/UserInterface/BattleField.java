@@ -139,7 +139,6 @@ public class BattleField extends Pane {
 		} else {
 			pm.setProgress((hero.getMana() + 0.0) / hero.getMaxMP());
 		}
-		pm.setProgress((hero.getMana() + 0.0) / hero.getMaxMP());
 		pm.setPrefSize(250, 20);
 		pm.setLayoutX(70);
 		pm.setLayoutY(500);
