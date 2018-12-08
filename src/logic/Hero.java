@@ -2,10 +2,12 @@ package logic;
 
 public abstract class Hero extends Character implements UsePotion {
 	private int mana;
+	private int maxMP;
 
-	public Hero(String name, int maxHP, int power, int mana) {
+	public Hero(String name, int maxHP, int power, int maxMP) {
 		super(name, maxHP, power);
-		this.mana = mana;
+		this.mana = maxMP;
+		this.maxMP = maxMP;
 	}
 
 	public boolean usePotion() {
@@ -27,6 +29,10 @@ public abstract class Hero extends Character implements UsePotion {
 
 	public void setMana(int mana) {
 		this.mana = mana;
+	}
+	
+	public int getMaxMP() {
+		return maxMP;
 	}
 
 	public abstract boolean useSkill(String skill, Character monster);

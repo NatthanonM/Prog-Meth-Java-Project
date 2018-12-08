@@ -135,11 +135,11 @@ public class BattleField extends Pane {
 		ProgressBar pm = new ProgressBar();
 		pm.setStyle("-fx-accent : blue");
 		if (hero.getMana() <= 0) {
-			ph.setProgress(0);
+			pm.setProgress(0);
 		} else {
-			ph.setProgress((hero.getHealth() + 0.0) / hero.getMaxHp());
+			pm.setProgress((hero.getMana() + 0.0) / hero.getMaxMP());
 		}
-		pm.setProgress((hero.getMana() + 0.0) / hero.getMana());
+		pm.setProgress((hero.getMana() + 0.0) / hero.getMaxMP());
 		pm.setPrefSize(250, 20);
 		pm.setLayoutX(70);
 		pm.setLayoutY(500);
