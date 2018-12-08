@@ -14,12 +14,8 @@ public abstract class Character {
 	}
 
 	public void takeDamage(int damage) {
-		if (this.health < damage) {
-			this.health = 0;
-		}
-		if (damage < 0)
-			damage = 0;
 		this.health -= damage;
+		if(this.health<0) this.health=0;
 	}
 
 	public boolean isDead() {
