@@ -63,6 +63,9 @@ public class HeroSelection extends Pane {
 			Pic.setLayoutY(103);
 			Pic.setFitHeight(183);
 			Pic.setFitWidth(200);
+			pane.setOnMouseClicked(e->{
+				hero = new Knight();
+			});
 		} else {
 			pane.setPrefSize(150, 300);
 			Text.setText("Mage");
@@ -71,6 +74,9 @@ public class HeroSelection extends Pane {
 			Pic.setLayoutY(102);
 			Pic.setFitHeight(175);
 			Pic.setFitWidth(150);
+			pane.setOnMouseClicked(e->{
+				hero = new Mage();
+			});
 		}
 		pane.setCursor(Cursor.HAND);
 		pane.getChildren().addAll(Text, Pic);

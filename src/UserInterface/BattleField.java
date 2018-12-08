@@ -25,7 +25,7 @@ public class BattleField extends Pane {
 	public BattleField(GameStage stage) {
 		super();
 		this.stage = stage;
-
+		
 		this.knightImage = new ImageView();
 		this.mageImage = new ImageView();
 		this.m1 = stage.getMonsters().get(0);//

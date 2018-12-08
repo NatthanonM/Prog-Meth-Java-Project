@@ -57,7 +57,6 @@ public class GameManager {
 		});
 
 		attack.setOnMouseClicked(e -> {
-			if (battleField.getHero() instanceof Knight) {
 				Random rand = new Random();
 				if (rand.nextInt() == 0) {
 					battleField.getHero().attack(battleField.getM1());
@@ -69,14 +68,6 @@ public class GameManager {
 					battleField.getHero().attack(battleField.getM3());
 					battleField.getM3().attack(battleField.getHero());
 				}
-			} else {
-				battleField.getHero().attack(battleField.getM1());
-				battleField.getHero().attack(battleField.getM2());
-				battleField.getHero().attack(battleField.getM3());
-				int damageDealth = (battleField.getM1().getPower() + battleField.getM2().getPower()
-						+ battleField.getM3().getPower()) / 2;
-				battleField.getHero().setHealth(battleField.getHero().getHealth() - damageDealth);
-			}
 			battleField.update();
 		});
 
