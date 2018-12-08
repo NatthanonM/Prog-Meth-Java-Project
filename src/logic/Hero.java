@@ -1,6 +1,6 @@
 package logic;
 
-public abstract class Hero extends Character {
+public abstract class Hero extends Character implements UsePotion {
 	private int mana;
 
 	public Hero(String name, int maxHP, int power, int mana) {
@@ -8,22 +8,17 @@ public abstract class Hero extends Character {
 		this.mana = mana;
 	}
 
-	public boolean useItem(String item) {
-		if (isDead(this))
+	public boolean usePotion() {
+		if (this.getHealth() == this.getMaxHp())
 			return false;
-		if (item == "Red Potion") {
+		if (this.isDead())
+			return false;
+		if (this.getMaxHp() - this.getHealth() < 50) {
+			this.setHealth(this.getMaxHp());
+		} else {
 			this.setHealth(getHealth() + 50);
-			return true;
 		}
-		if (item == "Blue Potion") {
-			this.setMana(getMana() + 50);
-			return true;
-		}
-		if (item == "Green Potion") {
-			this.setPower(getPower() + 5);
-			return true;
-		}
-		return false;
+		return true;
 	}
 
 	public int getMana() {

@@ -10,53 +10,47 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 
-public class Lobby extends StackPane{
+public class Lobby extends StackPane {
 
 	private Label gameName, gameStart;
 	private ImageView background;
-	
+
 	public Lobby() {
 		super();
 		Pane bg = new Pane();
 		background = new ImageView(new Image(ClassLoader.getSystemResource("images/forest.png").toString()));
 		bg.getChildren().add(background);
-		
+
 		VBox vbox = new VBox();
 		vbox.setAlignment(Pos.CENTER);
 		vbox.setSpacing(100);
-		
+
 		gameName = new Label();
 		gameName.setText("Monster Defeated");
 		gameName.setStyle("-fx-font-size: 84px");
 		gameName.setTextFill(Paint.valueOf("#00f6ff"));
 		gameName.setAlignment(Pos.CENTER);
-		
+
 		gameStart = new Label();
 		gameStart.setText("click here to start!!!");
 		gameStart.setStyle("-fx-font-size: 40px;");
 		gameStart.setTextFill(Paint.valueOf("#3fff00"));
 		gameStart.setAlignment(Pos.CENTER);
 		gameStart.setCursor(Cursor.HAND);
-		
+
 		vbox.getChildren().add(gameName);
 		vbox.getChildren().add(gameStart);
-		
-		gameStart.setOnMouseEntered(e -> {
-			gameStart.setText("Begin!!!");
-			gameStart.setMinWidth(gameStart.getWidth());
-		});
-		
-		gameStart.setOnMouseExited(e -> {
-			gameStart.setText("click to start!!!");
-		});
-		
-		gameStart.setOnMouseClicked(e -> {
-			this.setVisible(false);
-			Main.getHeroSelection().setVisible(true);
-		});
-		
+
 		this.getChildren().addAll(bg, vbox);
-		
+
 	}
-	
+
+	public Label getGameStart() {
+		return gameStart;
+	}
+
+	public void show(boolean show) {
+		this.setVisible(show);
+	}
+
 }

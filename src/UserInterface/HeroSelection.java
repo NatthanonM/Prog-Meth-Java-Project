@@ -9,12 +9,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import logic.GameManager;
+import logic.Hero;
 import logic.Knight;
 import logic.Mage;
 
 public class HeroSelection extends Pane {
 
 	private Pane knight, mage;
+	private Hero hero;
 
 	public HeroSelection() {
 		BorderPane bp = new BorderPane();
@@ -46,15 +48,6 @@ public class HeroSelection extends Pane {
 
 		this.getChildren().add(bp);
 		this.setVisible(false);
-		
-		knight.setOnMouseClicked(e->{
-			this.setVisible(false);
-			
-		});
-		
-		mage.setOnMouseClicked(e->{
-			this.setVisible(false);;
-		});
 	}
 
 	private void drawHeroPane(Pane pane, String type) {
@@ -81,6 +74,34 @@ public class HeroSelection extends Pane {
 		}
 		pane.setCursor(Cursor.HAND);
 		pane.getChildren().addAll(Text, Pic);
+	}
+
+	public void show(boolean show) {
+		this.setVisible(show);
+	}
+
+	public Hero getHero() {
+		return hero;
+	}
+
+	public Pane getKnight() {
+		return knight;
+	}
+
+	public Pane getMage() {
+		return mage;
+	}
+
+	public void setKnight(Pane knight) {
+		this.knight = knight;
+	}
+
+	public void setMage(Pane mage) {
+		this.mage = mage;
+	}
+
+	public void setHero(Hero hero) {
+		this.hero = hero;
 	}
 
 }

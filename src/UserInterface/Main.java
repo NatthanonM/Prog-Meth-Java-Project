@@ -5,28 +5,29 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import logic.GameManager;
-import logic.Hero;
+import logic.GameStage;
 
 public class Main extends Application {
-	
-	private Stage stage;
-	private static Map map;
-	private static Lobby lobby;
-	private static HeroSelection heroSelection;
 
 	@Override
-	public void start(Stage primaryStage){
-		
-		setStage(primaryStage);
-		lobby = new Lobby();
-		heroSelection = new HeroSelection();
-		setStage(primaryStage);
-		
-		StackPane root = new StackPane();
-		root.getChildren().addAll(lobby, heroSelection);
+	public void start(Stage primaryStage) {
 
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
+		Lobby lobby = new Lobby();
+		HeroSelection heroSelection = new HeroSelection();
+		BattleField battleField = new BattleField(new GameStage(1));
+
+		GameManager gm = new GameManager(lobby, heroSelection, battleField);
+
+		gm.setUpLobbyEvent(lobby.getGameStart());
+		gm.setUpHeroSelectionEvent(heroSelection.getKnight(), heroSelection.getMage());
+		gm.setUpBattleField(battleField.getAttack(), battleField.getSkill(), battleField.getUsePotion(),
+				battleField.getUltimate());
+
+		StackPane root = new StackPane();
+		root.getChildren().addAll(battleField, heroSelection, lobby);
+
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
 		primaryStage.setTitle("Monster Defeated");
 		primaryStage.setResizable(false);
 		primaryStage.setWidth(800);
@@ -35,24 +36,8 @@ public class Main extends Application {
 
 	}
 
-	public static HeroSelection getHeroSelection() {
-		return heroSelection;
-	}
-
 	public static void main(String[] args) {
 		launch(args);
-	}
-
-	public static Lobby getLobby() {
-		return lobby;
-	}
-
-	public Stage getStage() {
-		return stage;
-	}
-
-	public void setStage(Stage stage) {
-		this.stage = stage;
 	}
 
 }
