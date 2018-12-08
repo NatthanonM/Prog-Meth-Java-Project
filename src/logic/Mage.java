@@ -6,8 +6,8 @@ public class Mage extends Hero implements Attackable, UsePotion {
 
 	public Mage() {
 		super("Mage", 100, 5, 150);
-		this.skill1 = "Mskill1";
-		this.skill2 = "Mskill2";
+		this.skill1 = "MSkill1";
+		this.skill2 = "MSkill2";
 	}
 
 	@Override
