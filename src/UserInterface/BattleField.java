@@ -170,7 +170,8 @@ public class BattleField extends Pane {
 	public void update() {
 		this.getChildren().remove(top);
 		this.getChildren().remove(statusPane);
-
+		this.skill.setDisable(hero.getMana()<=0);
+		this.ultimate.setDisable(hero.getMana()<=0);
 		top = drawScreen(mPane1, mPane2, mPane3);
 		statusPane = drawStatusPane();
 
