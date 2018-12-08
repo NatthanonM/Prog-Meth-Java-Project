@@ -1,11 +1,14 @@
 package UserInterface;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import logic.Character;
 import logic.GameStage;
 import logic.Hero;
 import logic.Knight;
@@ -174,7 +177,6 @@ public class BattleField extends Pane {
 		this.ultimate.setDisable(hero.getMana()<=0);
 		top = drawScreen(mPane1, mPane2, mPane3);
 		statusPane = drawStatusPane();
-
 		this.getChildren().addAll(top, statusPane);
 	}
 
