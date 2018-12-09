@@ -53,6 +53,9 @@ public class GameManager {
 
 		usePotion.setOnMouseClicked(e -> {
 			battleField.getHero().usePotion();
+			int damageDealth = (battleField.getM1().getPower() + battleField.getM2().getPower()
+					+ battleField.getM3().getPower()) / 3;
+			battleField.getHero().setHealth(battleField.getHero().getHealth() - damageDealth);
 			battleField.update();
 		});
 
@@ -67,7 +70,7 @@ public class GameManager {
 				battleField.getHero().attack(battleField.getM2());
 				battleField.getHero().attack(battleField.getM3());
 				int damageDealth = (battleField.getM1().getPower() + battleField.getM2().getPower()
-						+ battleField.getM3().getPower()) / 2;
+						+ battleField.getM3().getPower()) / 3;
 				battleField.getHero().setHealth(battleField.getHero().getHealth() - damageDealth);
 			}
 			battleField.update();

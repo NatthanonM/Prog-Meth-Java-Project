@@ -33,8 +33,16 @@ public abstract class Hero extends Character implements Attackable {
 		return mana;
 	}
 
+	public void setMaxMP(int maxMP) {
+		this.maxMP = maxMP;
+	}
+
 	public void setMana(int mana) {
-		this.mana = mana;
+		if( mana >= this.getMaxMP() ) {
+			this.mana = this.getMaxMP();
+		} else {
+			this.mana = mana;
+		}
 	}
 	
 	public int getMaxMP() {

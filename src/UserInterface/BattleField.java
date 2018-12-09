@@ -224,9 +224,12 @@ public class BattleField extends Pane {
 			this.mPane3 = new Pane();//
 			top = drawScreen(mPane1, mPane2, mPane3);
 			drawHero();
+			hero.setMaxMP(hero.getMaxMP() + 5);
+			hero.setMaxHp(hero.getMaxHp() + 20);
 			hero.setMana(hero.getMaxMP());
 			hero.setHealth(hero.getMaxHp());
 		}
+		hero.setMana(hero.getMana() + 5);
 		this.attack.setDisable(hero.isDead());
 		this.usePotion.setDisable(hero.isDead());
 		this.skill.setDisable(hero.getMana() < hero.getManaCost1() || hero.isDead());
