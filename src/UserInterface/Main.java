@@ -8,10 +8,9 @@ import logic.GameManager;
 import logic.GameStage;
 
 public class Main extends Application {
-	public Stage primaryStage;
+	public static Stage primaryStage;
 	@Override
 	public void start(Stage primaryStage) {
-		this.primaryStage = primaryStage;
 		Lobby lobby = new Lobby();
 		HeroSelection heroSelection = new HeroSelection();
 		BattleField battleField = new BattleField(new GameStage(1));
@@ -38,6 +37,10 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	public static void close() {
+		primaryStage.close();
 	}
 
 }

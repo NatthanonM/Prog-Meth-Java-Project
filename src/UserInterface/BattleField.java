@@ -209,7 +209,7 @@ public class BattleField extends Pane {
 			
 			Optional<ButtonType> result = gameOver.showAndWait();
 			if(result.get() == res) {
-				
+				Main.close();
 				Platform.runLater(() -> new Main().start(new Stage()));;
 			}
 		}
