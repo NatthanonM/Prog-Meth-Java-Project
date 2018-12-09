@@ -2,12 +2,16 @@ package UserInterface;
 
 import java.util.ArrayList;
 
+import javax.sound.sampled.AudioSystem;
+
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
 import logic.Character;
 import logic.GameStage;
 import logic.Hero;
@@ -19,7 +23,7 @@ public class BattleField extends Pane {
 
 	private Hero hero;
 	private int potion = 0;
-	private int currentStage = 1;
+	private int currentStage = 2;
 	private GameStage stage;
 	private ImageView knightImage, mageImage;
 	private Monster m1, m2, m3;
@@ -43,7 +47,6 @@ public class BattleField extends Pane {
 		this.skill = new Button();
 		this.usePotion = new Button();
 		this.ultimate = new Button();
-
 		top = drawScreen(mPane1, mPane2, mPane3);
 		drawHero();
 		drawMenu(attack, skill, usePotion, ultimate);
@@ -188,11 +191,22 @@ public class BattleField extends Pane {
 		this.getChildren().remove(top);
 		this.getChildren().remove(statusPane);
 		this.updateMonster();
+		if(m1.isDead()&&m2.isDead()&&m3.isDead()) {
+			stage = new GameStage(currentStage++);
+			this.aliveMonster = new ArrayList<Monster>(stage.getMonsters());
+			this.m1 = stage.getMonsters().get(0);//
+			this.m2 = stage.getMonsters().get(1);//
+			this.m3 = stage.getMonsters().get(2);//
+			this.mPane1 = new Pane();//
+			this.mPane2 = new Pane();//
+			this.mPane3 = new Pane();//
+			top = drawScreen(mPane1, mPane2, mPane3);
+			drawHero();
+			hero.setMana(hero.getMaxMP());
+			hero.setHealth(hero.getMaxHp());
+		}
 		this.skill.setDisable(hero.getMana() < hero.getManaCost1());
 		this.ultimate.setDisable(hero.getMana() < hero.getManaCost2());
-		if(m1.isDead() && m2.isDead() && m3.isDead()) {
-			stage = new GameStage(currentStage++);
-		}
 		top = drawScreen(mPane1, mPane2, mPane3);
 		statusPane = drawStatusPane();
 		this.getChildren().addAll(top, statusPane);
