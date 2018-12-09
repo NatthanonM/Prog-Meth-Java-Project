@@ -1,5 +1,7 @@
 package UserInterface;
 
+import java.util.ArrayList;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -23,11 +25,11 @@ public class BattleField extends Pane {
 	private Monster m1, m2, m3;
 	private Pane top, mPane1, mPane2, mPane3, statusPane;
 	private Button attack, skill, usePotion, ultimate;
-
+	private ArrayList<Monster> aliveMonster;
 	public BattleField(GameStage stage) {
 		super();
 		this.stage = stage;
-
+		this.aliveMonster = new ArrayList<Monster>(stage.getMonsters());
 		this.knightImage = new ImageView();
 		this.mageImage = new ImageView();
 		this.m1 = stage.getMonsters().get(0);//
@@ -185,6 +187,7 @@ public class BattleField extends Pane {
 	public void update() {
 		this.getChildren().remove(top);
 		this.getChildren().remove(statusPane);
+		this.updateMonster();
 		this.skill.setDisable(hero.getMana() < hero.getManaCost1());
 		this.ultimate.setDisable(hero.getMana() < hero.getManaCost2());
 		if(m1.isDead() && m2.isDead() && m3.isDead()) {
@@ -194,7 +197,13 @@ public class BattleField extends Pane {
 		statusPane = drawStatusPane();
 		this.getChildren().addAll(top, statusPane);
 	}
-
+	
+	public void updateMonster() {
+		for(int i=0;i<aliveMonster.size();i++) {
+			if(aliveMonster.get(i).isDead()) aliveMonster.remove(i);
+		}
+	}
+	
 	public void updateHero(Hero hero) {
 		if (hero instanceof Knight) {
 			mageImage.setVisible(false);
@@ -257,4 +266,8 @@ public class BattleField extends Pane {
 		return ultimate;
 	}
 
+	public ArrayList<Monster> getAliveMonster() {
+		return aliveMonster;
+	}
+	
 }
