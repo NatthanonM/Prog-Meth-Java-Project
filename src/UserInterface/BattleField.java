@@ -1,18 +1,25 @@
 package UserInterface;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
-import javax.sound.sampled.AudioSystem;
 
-import javafx.geometry.Pos;
+
+import javafx.application.Platform;
+
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.AudioClip;
-import logic.Character;
+
+import javafx.stage.Stage;
+
 import logic.GameStage;
 import logic.Hero;
 import logic.Knight;
@@ -191,6 +198,21 @@ public class BattleField extends Pane {
 		this.getChildren().remove(top);
 		this.getChildren().remove(statusPane);
 		this.updateMonster();
+		if(hero.isDead()) {
+			Alert gameOver = new Alert(AlertType.CONFIRMATION);
+			gameOver.setTitle("Game Over!");
+			gameOver.setHeaderText("Game Over!");
+			gameOver.setContentText("You're Dead.");
+			
+			ButtonType res = new ButtonType("Start New Game");
+			gameOver.getButtonTypes().setAll(res);
+			
+			Optional<ButtonType> result = gameOver.showAndWait();
+			if(result.get() == res) {
+				
+				Platform.runLater(() -> new Main().start(new Stage()));;
+			}
+		}
 		if(m1.isDead()&&m2.isDead()&&m3.isDead()) {
 			stage = new GameStage(currentStage++);
 			this.aliveMonster = new ArrayList<Monster>(stage.getMonsters());
@@ -205,8 +227,10 @@ public class BattleField extends Pane {
 			hero.setMana(hero.getMaxMP());
 			hero.setHealth(hero.getMaxHp());
 		}
-		this.skill.setDisable(hero.getMana() < hero.getManaCost1());
-		this.ultimate.setDisable(hero.getMana() < hero.getManaCost2());
+		this.attack.setDisable(hero.isDead());
+		this.usePotion.setDisable(hero.isDead());
+		this.skill.setDisable(hero.getMana() < hero.getManaCost1() || hero.isDead());
+		this.ultimate.setDisable(hero.getMana() < hero.getManaCost2() || hero.isDead());
 		top = drawScreen(mPane1, mPane2, mPane3);
 		statusPane = drawStatusPane();
 		this.getChildren().addAll(top, statusPane);
