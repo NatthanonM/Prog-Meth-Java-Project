@@ -31,7 +31,15 @@ public class Mage extends Hero{
 	public boolean useSkill(Character monster) {
 		return false;
 	}
-	
 
+	@Override
+	public boolean attack(Character target) {
+		if (!target.isDead()) {
+			target.setHealth(target.getHealth() - this.getPower() < 0 ? 0 : target.getHealth() - this.getPower());
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }

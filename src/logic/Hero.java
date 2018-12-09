@@ -1,6 +1,6 @@
 package logic;
 
-public abstract class Hero extends Character implements UsePotion {
+public abstract class Hero extends Character implements Attackable {
 	private int mana;
 	private int maxMP;
 	private int manaCost1;
@@ -26,6 +26,8 @@ public abstract class Hero extends Character implements UsePotion {
 		}
 		return true;
 	}
+	
+	public abstract boolean attack(Character target) ;
 
 	public int getMana() {
 		return mana;
