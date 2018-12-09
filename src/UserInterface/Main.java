@@ -39,7 +39,7 @@ public class Main extends Application {
 		launch(args);
 	}
 	
-	public static void close() {
+	public void close() {
 		primaryStage.close();
 	}
 
