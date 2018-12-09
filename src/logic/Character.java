@@ -1,6 +1,6 @@
 package logic;
 
-public abstract class Character implements Attackable{
+public abstract class Character{
 	private String name;
 	private int health;
 	private int power;
@@ -26,15 +26,6 @@ public abstract class Character implements Attackable{
 
 	public boolean isDead() {
 		return health <= 0;
-	}
-
-	public boolean attack(Character target) {
-		if (!target.isDead()) {
-			target.setHealth(target.getHealth() - this.getPower() < 0 ? 0 : target.getHealth() - this.getPower());
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	public int getHealth() {
