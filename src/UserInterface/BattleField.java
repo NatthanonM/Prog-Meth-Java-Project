@@ -204,16 +204,29 @@ public class BattleField extends Pane {
 			gameOver.setHeaderText("Game Over!");
 			gameOver.setContentText("You're Dead.");
 			
-			ButtonType res = new ButtonType("Start New Game");
+			ButtonType res = new ButtonType("Close Game");
 			gameOver.getButtonTypes().setAll(res);
 			
 			Optional<ButtonType> result = gameOver.showAndWait();
 			if(result.get() == res) {
-				Platform.runLater(() -> new Main().start(new Stage()));
-				
+				Platform.exit();
 			}
 		}
 		if(m1.isDead()&&m2.isDead()&&m3.isDead()) {
+			if(currentStage==15) {
+				Alert gameOver = new Alert(AlertType.CONFIRMATION);
+				gameOver.setTitle("Victory!");
+				gameOver.setHeaderText("Victory!");
+				gameOver.setContentText("You  Win.");
+				
+				ButtonType res = new ButtonType("Close Game");
+				gameOver.getButtonTypes().setAll(res);
+				
+				Optional<ButtonType> result = gameOver.showAndWait();
+				if(result.get() == res) {
+					Platform.exit();
+				}
+			}
 			stage = new GameStage(currentStage++);
 			this.aliveMonster = new ArrayList<Monster>(stage.getMonsters());
 			this.m1 = stage.getMonsters().get(0);//
@@ -229,7 +242,6 @@ public class BattleField extends Pane {
 			hero.setMana(hero.getMaxMP());
 			hero.setHealth(hero.getMaxHp());
 		}
-		hero.setMana(hero.getMana() + 5);
 		this.attack.setDisable(hero.isDead());
 		this.usePotion.setDisable(hero.isDead());
 		this.skill.setDisable(hero.getMana() < hero.getManaCost1() || hero.isDead());
