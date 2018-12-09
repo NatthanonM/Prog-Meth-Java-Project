@@ -1,6 +1,6 @@
 package logic;
 
-public abstract class Character {
+public abstract class Character implements Attackable{
 	private String name;
 	private int health;
 	private int power;
@@ -13,9 +13,15 @@ public abstract class Character {
 		this.power = power;
 	}
 
-	public void takeDamage(int damage) {
+	public boolean takeDamage(int damage) {
+		if (this.health == 0) return false;
+		if (this.health < damage) {
+			this.health = 0;
+			return true;
+		}
+		if (damage < 0) damage = 0;
 		this.health -= damage;
-		if(this.health<0) this.health=0;
+		return true;
 	}
 
 	public boolean isDead() {

@@ -84,36 +84,30 @@ public class GameManager {
 			if (battleField.getHero() instanceof Knight) {
 				Random rand = new Random();
 				if (rand.nextInt()%3 == 0) {
-					battleField.getHero().useSkill("KSkill1", battleField.getM2());
-					battleField.getHero().useSkill("KSkill1", battleField.getM3());
+					battleField.getHero().useSkill(battleField.getM2() , battleField.getM3());
 					int damageSum = (battleField.getM2().getPower() + battleField.getM3().getPower());
 					battleField.getHero().setHealth(battleField.getHero().getHealth() - damageSum);
 				} else if (rand.nextInt()%3 == 1) {
-					battleField.getHero().useSkill("KSkill1", battleField.getM1());
-					battleField.getHero().useSkill("KSkill1", battleField.getM3());
+					battleField.getHero().useSkill(battleField.getM1(), battleField.getM3());
 					int damageSum = (battleField.getM1().getPower() + battleField.getM3().getPower()) / 2;
 					battleField.getHero().setHealth(battleField.getHero().getHealth() - damageSum);
 				} else {
-					battleField.getHero().useSkill("KSkill1", battleField.getM1());
-					battleField.getHero().useSkill("KSkill1", battleField.getM2());
+					battleField.getHero().useSkill(battleField.getM1(), battleField.getM2());
 					int damageSum = (battleField.getM1().getPower() + battleField.getM2().getPower()) / 2;
 					battleField.getHero().setHealth(battleField.getHero().getHealth() - damageSum);
 				}
 			} else {
 				Random rand = new Random();
 				if (rand.nextInt()%3 == 0) {
-					battleField.getHero().useSkill("MSkill1", battleField.getM2());
-					battleField.getHero().useSkill("MSkill1", battleField.getM3());
+					battleField.getHero().useSkill(battleField.getM2(), battleField.getM3());
 					int damageSum = (battleField.getM2().getPower() + battleField.getM3().getPower()) / 2;
 					battleField.getHero().setHealth(battleField.getHero().getHealth() - damageSum);
 				} else if (rand.nextInt()%3 == 1) {
-					battleField.getHero().useSkill("MSkill1", battleField.getM1());
-					battleField.getHero().useSkill("MSkill1", battleField.getM3());
+					battleField.getHero().useSkill(battleField.getM1(), battleField.getM3());
 					int damageSum = (battleField.getM1().getPower() + battleField.getM3().getPower()) / 2;
 					battleField.getHero().setHealth(battleField.getHero().getHealth() - damageSum);
 				} else {
-					battleField.getHero().useSkill("MSkill1", battleField.getM1());
-					battleField.getHero().useSkill("MSkill1", battleField.getM2());
+					battleField.getHero().useSkill(battleField.getM1(), battleField.getM2());
 					int damageSum = (battleField.getM1().getPower() + battleField.getM2().getPower()) / 2;
 					battleField.getHero().setHealth(battleField.getHero().getHealth() - damageSum);
 				}
@@ -125,19 +119,17 @@ public class GameManager {
 			if (battleField.getHero() instanceof Knight) {
 				Random rand = new Random();
 				if (rand.nextInt()%3 == 0) {
-					battleField.getHero().useSkill("KSkill2", battleField.getM1());
+					battleField.getHero().useSkill(battleField.getM1());
 					battleField.getM1().attack(battleField.getHero());
 				} else if (rand.nextInt()%3 == 1) {
-					battleField.getHero().useSkill("KSkill2", battleField.getM2());
+					battleField.getHero().useSkill( battleField.getM2());
 					battleField.getM2().attack(battleField.getHero());
 				} else {
-					battleField.getHero().useSkill("KSkill2", battleField.getM3());
+					battleField.getHero().useSkill(battleField.getM3());
 					battleField.getM3().attack(battleField.getHero());
 				}
 			} else {
-				battleField.getHero().useSkill("MSkill2", battleField.getM1());
-				battleField.getHero().useSkill("MSkill2", battleField.getM2());
-				battleField.getHero().useSkill("MSkill2", battleField.getM3());
+				battleField.getHero().useSkill(battleField.getM1(), battleField.getM2(), battleField.getM3());
 				int damageSum = (battleField.getM1().getPower() + battleField.getM2().getPower()
 						+ battleField.getM3().getPower()) / 3;
 				battleField.getHero().setHealth(battleField.getHero().getHealth() - damageSum);

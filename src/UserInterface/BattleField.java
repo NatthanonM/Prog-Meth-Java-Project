@@ -1,7 +1,5 @@
 package UserInterface;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -19,6 +17,7 @@ public class BattleField extends Pane {
 
 	private Hero hero;
 	private int potion = 0;
+	private int currentStage = 1;
 	private GameStage stage;
 	private ImageView knightImage, mageImage;
 	private Monster m1, m2, m3;
@@ -28,7 +27,7 @@ public class BattleField extends Pane {
 	public BattleField(GameStage stage) {
 		super();
 		this.stage = stage;
-		
+
 		this.knightImage = new ImageView();
 		this.mageImage = new ImageView();
 		this.m1 = stage.getMonsters().get(0);//
@@ -112,18 +111,31 @@ public class BattleField extends Pane {
 	public Pane drawStatusPane() {
 		Pane pane = new Pane();
 		/////
-		// draw text
+		/// draw text
+		// hp
+		Label hp = new Label();
+		hp.setText(Integer.toString(this.hero.getHealth()) + "/" + Integer.toString(this.hero.getMaxHp()));
+		hp.setLayoutX(330);
+		hp.setLayoutY(455);
+		hp.setStyle("-fx-font-size:20px;");
 		Label h = new Label();
 		h.setText("HP");
 		h.setStyle("-fx-font-size:28px;");
 		h.setLayoutX(20);
 		h.setLayoutY(450);
+		// mp
+		Label mp = new Label();
+		mp.setText(Integer.toString(this.hero.getMana()) + "/" + Integer.toString(this.hero.getMaxMP()));
+		mp.setLayoutX(330);
+		mp.setLayoutY(495);
+		mp.setStyle("-fx-font-size:20px;");
 		Label m = new Label();
 		m.setText("MP");
 		m.setStyle("-fx-font-size:28px;");
 		m.setLayoutX(20);
 		m.setLayoutY(490);
-		// draw ProgressBar
+		/// draw ProgressBar
+		// hp
 		ProgressBar ph = new ProgressBar();
 		ph.setStyle("-fx-accent : red");
 		if (hero.getHealth() <= 0) {
@@ -134,7 +146,7 @@ public class BattleField extends Pane {
 		ph.setPrefSize(250, 20);
 		ph.setLayoutX(70);
 		ph.setLayoutY(460);
-		//
+		// mp
 		ProgressBar pm = new ProgressBar();
 		pm.setStyle("-fx-accent : blue");
 		if (hero.getMana() <= 0) {
@@ -146,7 +158,7 @@ public class BattleField extends Pane {
 		pm.setLayoutX(70);
 		pm.setLayoutY(500);
 		/////
-		pane.getChildren().addAll(h, m, ph, pm);
+		pane.getChildren().addAll(hp, h, mp, m, ph, pm);
 		return pane;
 	}
 
@@ -173,8 +185,11 @@ public class BattleField extends Pane {
 	public void update() {
 		this.getChildren().remove(top);
 		this.getChildren().remove(statusPane);
-		this.skill.setDisable(hero.getMana()<=0);
-		this.ultimate.setDisable(hero.getMana()<=0);
+		this.skill.setDisable(hero.getMana() < hero.getManaCost1());
+		this.ultimate.setDisable(hero.getMana() < hero.getManaCost2());
+		if(m1.isDead() && m2.isDead() && m3.isDead()) {
+			stage = new GameStage(currentStage++);
+		}
 		top = drawScreen(mPane1, mPane2, mPane3);
 		statusPane = drawStatusPane();
 		this.getChildren().addAll(top, statusPane);

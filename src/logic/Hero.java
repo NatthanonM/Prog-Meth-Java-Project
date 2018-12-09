@@ -3,11 +3,15 @@ package logic;
 public abstract class Hero extends Character implements UsePotion {
 	private int mana;
 	private int maxMP;
+	private int manaCost1;
+	private int manaCost2;
 
-	public Hero(String name, int maxHP, int power, int maxMP) {
+	public Hero(String name, int maxHP, int power, int maxMP, int manaCost1, int manaCost2) {
 		super(name, maxHP, power);
 		this.mana = maxMP;
 		this.maxMP = maxMP;
+		this.manaCost1 = manaCost1;
+		this.manaCost2 = manaCost2;
 	}
 
 	public boolean usePotion() {
@@ -35,5 +39,17 @@ public abstract class Hero extends Character implements UsePotion {
 		return maxMP;
 	}
 
-	public abstract boolean useSkill(String skill, Character monster);
+	public int getManaCost1() {
+		return manaCost1;
+	}
+
+	public int getManaCost2() {
+		return manaCost2;
+	}
+
+	public abstract boolean useSkill(Character monster);
+	
+	public abstract boolean useSkill(Character monster1, Character monster2);
+	
+	public abstract boolean useSkill(Character monster1, Character monster2, Character monster3);
 }
