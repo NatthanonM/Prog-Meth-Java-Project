@@ -62,8 +62,11 @@ public class GameManager {
 		usePotion.setOnMouseClicked(e -> {
 			battleField.getHero().usePotion();
 			battleField.setPotion(battleField.getPotion() - 1);
-			int damageDealth = (battleField.getM1().getPower() + battleField.getM2().getPower()
-					+ battleField.getM3().getPower()) / 3;
+			int damageDealth = 0;
+			for(int i = 0; i < battleField.getAliveMonster().size(); i++) {
+				damageDealth += battleField.getAliveMonster().get(i).getPower();
+			}
+			damageDealth /= battleField.getAliveMonster().size();
 			battleField.getHero().setHealth(battleField.getHero().getHealth() - damageDealth);
 			battleField.update();
 		});
@@ -78,8 +81,11 @@ public class GameManager {
 				battleField.getHero().attack(battleField.getM1());
 				battleField.getHero().attack(battleField.getM2());
 				battleField.getHero().attack(battleField.getM3());
-				int damageDealth = (battleField.getM1().getPower() + battleField.getM2().getPower()
-						+ battleField.getM3().getPower()) / 3;
+				int damageDealth = 0;
+				for(int i = 0; i < battleField.getAliveMonster().size(); i++) {
+					damageDealth += battleField.getAliveMonster().get(i).getPower();
+				}
+				damageDealth /= battleField.getAliveMonster().size();
 				battleField.getHero().setHealth(battleField.getHero().getHealth() - damageDealth);
 			}
 			battleField.update();
@@ -104,9 +110,11 @@ public class GameManager {
 				battleField.getAliveMonster().get(i).attack(battleField.getHero());
 			} else {
 				battleField.getHero().useSkill(battleField.getM1(), battleField.getM2(), battleField.getM3());
-				int damageSum = (battleField.getM1().getPower() + battleField.getM2().getPower()
-						+ battleField.getM3().getPower()) / 3;
-				battleField.getHero().setHealth(battleField.getHero().getHealth() - damageSum);
+				int damageDealth = 0;
+				for(int i = 0; i < battleField.getAliveMonster().size(); i++) {
+					damageDealth += battleField.getAliveMonster().get(i).getPower();
+				}
+				battleField.getHero().setHealth(battleField.getHero().getHealth() - damageDealth);
 			}
 			battleField.update();
 		});
