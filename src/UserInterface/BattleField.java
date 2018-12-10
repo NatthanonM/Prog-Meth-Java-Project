@@ -26,7 +26,7 @@ import logic.Monster;
 public class BattleField extends Pane {
 
 	private Hero hero;
-	private int potion = 0;
+	private int potion = 1;
 	private int currentStage = 2;
 	private PlaySound sound;
 	private GameStage stage;
@@ -97,7 +97,7 @@ public class BattleField extends Pane {
 	}
 
 	//////
-	public void drawMonsterPane(Pane pane, Monster m, int i, int x, int y) {
+	private void drawMonsterPane(Pane pane, Monster m, int i, int x, int y) {
 		pane.setLayoutX(x);
 		pane.setLayoutY(y);
 		pane.setMaxSize(200, 200);
@@ -125,7 +125,7 @@ public class BattleField extends Pane {
 	}
 
 	//////
-	public Pane drawStatusPane() {
+	private Pane drawStatusPane() {
 		Pane pane = new Pane();
 		/////
 		/// draw text
@@ -179,7 +179,7 @@ public class BattleField extends Pane {
 	}
 
 	/////
-	public void drawMenu(Button attack, Button skill, Button usePotion, Button ultimate) {
+	private void drawMenu(Button attack, Button skill, Button usePotion, Button ultimate) {
 		attack.setText("Attack");
 		attack.setLayoutX(450);
 		attack.setLayoutY(450);
@@ -198,7 +198,7 @@ public class BattleField extends Pane {
 		ultimate.setLayoutY(500);
 	}
 
-	public void drawPotionStatus(Label potionStatus) {
+	private void drawPotionStatus(Label potionStatus) {
 		potionStatus.setText("Remaining Potion : " + Integer.toString(this.potion));
 		potionStatus.setLayoutX(425);
 		potionStatus.setLayoutY(535);
@@ -216,6 +216,7 @@ public class BattleField extends Pane {
 		this.getChildren().remove(potionStatus);
 		this.updateMonster();
 		if (hero.isDead()) {
+			show(false);
 			Main.getSound().stopNormalSound();
 			Alert gameOver = new Alert(AlertType.CONFIRMATION);
 			gameOver.setTitle("Game Over!");
@@ -236,6 +237,7 @@ public class BattleField extends Pane {
 			int i = rand.nextInt(Integer.MAX_VALUE) % 3;
 			this.potion += i;
 			if (currentStage > 15) {
+				show(false);
 				sound.stopBossSound();
 				Alert gameOver = new Alert(AlertType.CONFIRMATION);
 				gameOver.setTitle("Victory!");
