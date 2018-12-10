@@ -44,7 +44,7 @@ public class BattleField extends Pane {
 		this.aliveMonster = new ArrayList<Monster>(stage.getMonsters());
 		this.knightImage = new ImageView();
 		this.mageImage = new ImageView();
-		this.background = new ImageView(new Image(ClassLoader.getSystemResource("images/battleField.png").toString()));
+		this.background = new ImageView(new Image(ClassLoader.getSystemResource("images/battlefield.png").toString()));
 		this.m1 = stage.getMonsters().get(0);
 		this.m2 = stage.getMonsters().get(1);
 		this.m3 = stage.getMonsters().get(2);
