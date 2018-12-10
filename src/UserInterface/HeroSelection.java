@@ -34,10 +34,10 @@ public class HeroSelection extends Pane {
 		gp.setHgap(80);
 
 		knight = new Pane();
-		drawHeroPane(knight, "Knight");
+		drawHeroPane(knight, "knight");
 
 		mage = new Pane();
-		drawHeroPane(mage, "Mage");
+		drawHeroPane(mage, "mage");
 
 		gp.add(knight, 0, 0);
 		gp.add(mage, 1, 0);
@@ -54,7 +54,7 @@ public class HeroSelection extends Pane {
 		Label Text = new Label();
 		Text.setStyle("-fx-font-size: 48px;");
 		Text.setLayoutY(15);
-		if (type.equals("Knight")) {
+		if (type.equals("knight")) {
 			pane.setPrefSize(200, 300);
 			Text.setText("Knight");
 			Text.setLayoutX(15);

@@ -67,16 +67,16 @@ public class GameStage {
 			monsters.add(wolf1);
 			monsters.add(wolf2);
 		} else if (stage == 9) {
-			Monster ghost1 = new Monster("Ghost", 150, 10);
-			Monster ghost2 = new Monster("Ghost", 150, 10);
-			Monster ghost3 = new Monster("Ghost", 150, 10);
+			Monster ghost1 = new Monster("Ghost", 170, 10);
+			Monster ghost2 = new Monster("Ghost", 170, 10);
+			Monster ghost3 = new Monster("Ghost", 170, 10);
 			monsters.add(ghost1);
 			monsters.add(ghost2);
 			monsters.add(ghost3);
 		} else if (stage == 10) {
-			Monster ghost1 = new Monster("Ghost", 150, 10);
+			Monster ghost1 = new Monster("Ghost", 170, 10);
 			Monster zombie = new Monster("Zombie", 180, 15);
-			Monster ghost2 = new Monster("Ghost", 150, 10);
+			Monster ghost2 = new Monster("Ghost", 170, 10);
 			monsters.add(zombie);
 			monsters.add(ghost1);
 			monsters.add(ghost2);
