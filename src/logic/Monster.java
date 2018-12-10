@@ -5,7 +5,7 @@ public class Monster extends Character implements Attackable {
 	public Monster(String name, int maxHP, int power) {
 		super(name, maxHP, power);
 	}
-	
+
 	@Override
 	public boolean attack(Character target) {
 		if (!target.isDead()) {
@@ -15,6 +15,5 @@ public class Monster extends Character implements Attackable {
 			return false;
 		}
 	}
-
 
 }

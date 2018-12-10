@@ -8,7 +8,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import logic.GameManager;
 import logic.Hero;
 import logic.Knight;
 import logic.Mage;
@@ -63,7 +62,7 @@ public class HeroSelection extends Pane {
 			Pic.setLayoutY(103);
 			Pic.setFitHeight(183);
 			Pic.setFitWidth(200);
-			pane.setOnMouseClicked(e->{
+			pane.setOnMouseClicked(e -> {
 				hero = new Knight();
 			});
 		} else {
@@ -74,7 +73,7 @@ public class HeroSelection extends Pane {
 			Pic.setLayoutY(102);
 			Pic.setFitHeight(175);
 			Pic.setFitWidth(150);
-			pane.setOnMouseClicked(e->{
+			pane.setOnMouseClicked(e -> {
 				hero = new Mage();
 			});
 		}

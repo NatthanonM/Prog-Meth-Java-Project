@@ -2,8 +2,7 @@ package UserInterface;
 
 import java.util.ArrayList;
 import java.util.Optional;
-
-
+import java.util.Random;
 
 import javafx.application.Platform;
 
@@ -18,8 +17,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-import javafx.stage.Stage;
-
 import logic.GameStage;
 import logic.Hero;
 import logic.Knight;
@@ -31,34 +28,42 @@ public class BattleField extends Pane {
 	private Hero hero;
 	private int potion = 0;
 	private int currentStage = 2;
+	private PlaySound sound;
 	private GameStage stage;
-	private ImageView knightImage, mageImage;
+	private ImageView knightImage, mageImage, background;
 	private Monster m1, m2, m3;
 	private Pane top, mPane1, mPane2, mPane3, statusPane;
 	private Button attack, skill, usePotion, ultimate;
+	private Label potionStatus;
 	private ArrayList<Monster> aliveMonster;
+
 	public BattleField(GameStage stage) {
 		super();
 		this.stage = stage;
+		this.sound = new PlaySound();
 		this.aliveMonster = new ArrayList<Monster>(stage.getMonsters());
 		this.knightImage = new ImageView();
 		this.mageImage = new ImageView();
-		this.m1 = stage.getMonsters().get(0);//
-		this.m2 = stage.getMonsters().get(1);//
-		this.m3 = stage.getMonsters().get(2);//
-		this.mPane1 = new Pane();//
-		this.mPane2 = new Pane();//
-		this.mPane3 = new Pane();//
-		this.statusPane = new Pane();//
+		this.background = new ImageView(new Image(ClassLoader.getSystemResource("images/battleField.png").toString()));
+		this.m1 = stage.getMonsters().get(0);
+		this.m2 = stage.getMonsters().get(1);
+		this.m3 = stage.getMonsters().get(2);
+		this.mPane1 = new Pane();
+		this.mPane2 = new Pane();
+		this.mPane3 = new Pane();
+		this.statusPane = new Pane();
 		this.attack = new Button();
 		this.skill = new Button();
 		this.usePotion = new Button();
 		this.ultimate = new Button();
+		this.potionStatus = new Label();
 		top = drawScreen(mPane1, mPane2, mPane3);
 		drawHero();
 		drawMenu(attack, skill, usePotion, ultimate);
+		drawPotionStatus(potionStatus);
 
-		this.getChildren().addAll(knightImage, mageImage, top, statusPane, attack, skill, usePotion, ultimate);
+		this.getChildren().addAll(background, knightImage, mageImage, top, statusPane, attack, skill, usePotion,
+				ultimate, potionStatus);
 	}
 
 	/////
@@ -169,7 +174,6 @@ public class BattleField extends Pane {
 		pm.setPrefSize(250, 20);
 		pm.setLayoutX(70);
 		pm.setLayoutY(500);
-		/////
 		pane.getChildren().addAll(hp, h, mp, m, ph, pm);
 		return pane;
 	}
@@ -194,47 +198,71 @@ public class BattleField extends Pane {
 		ultimate.setLayoutY(500);
 	}
 
+	public void drawPotionStatus(Label potionStatus) {
+		potionStatus.setText("Remaining Potion : " + Integer.toString(this.potion));
+		potionStatus.setLayoutX(425);
+		potionStatus.setLayoutY(535);
+		potionStatus.setStyle("-fx-font-size:16px;");
+	}
+
 	public void update() {
+		try {
+			Thread.sleep(150);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		this.getChildren().remove(top);
 		this.getChildren().remove(statusPane);
+		this.getChildren().remove(potionStatus);
 		this.updateMonster();
-		if(hero.isDead()) {
+		if (hero.isDead()) {
+			Main.getSound().stopNormalSound();
 			Alert gameOver = new Alert(AlertType.CONFIRMATION);
 			gameOver.setTitle("Game Over!");
 			gameOver.setHeaderText("Game Over!");
 			gameOver.setContentText("You're Dead.");
-			
+
 			ButtonType res = new ButtonType("Close Game");
 			gameOver.getButtonTypes().setAll(res);
-			
+
 			Optional<ButtonType> result = gameOver.showAndWait();
-			if(result.get() == res) {
+			if (result.get() == res) {
 				Platform.exit();
+				System.exit(1);
 			}
 		}
-		if(m1.isDead()&&m2.isDead()&&m3.isDead()) {
-			if(currentStage==15) {
+		if (m1.isDead() && m2.isDead() && m3.isDead()) {
+			Random rand = new Random();
+			int i = rand.nextInt(Integer.MAX_VALUE) % 3;
+			this.potion += i;
+			if (currentStage > 15) {
+				sound.stopBossSound();
 				Alert gameOver = new Alert(AlertType.CONFIRMATION);
 				gameOver.setTitle("Victory!");
 				gameOver.setHeaderText("Victory!");
-				gameOver.setContentText("You  Win.");
-				
+				gameOver.setContentText("Congratulation !!! You  Win.");
+
 				ButtonType res = new ButtonType("Close Game");
 				gameOver.getButtonTypes().setAll(res);
-				
+
 				Optional<ButtonType> result = gameOver.showAndWait();
-				if(result.get() == res) {
+				if (result.get() == res) {
 					Platform.exit();
+					System.exit(1);
 				}
 			}
 			stage = new GameStage(currentStage++);
+			if (currentStage == 16) {
+				Main.getSound().stopNormalSound();
+				sound.playBossSound();
+			}
 			this.aliveMonster = new ArrayList<Monster>(stage.getMonsters());
-			this.m1 = stage.getMonsters().get(0);//
-			this.m2 = stage.getMonsters().get(1);//
-			this.m3 = stage.getMonsters().get(2);//
-			this.mPane1 = new Pane();//
-			this.mPane2 = new Pane();//
-			this.mPane3 = new Pane();//
+			this.m1 = stage.getMonsters().get(0);
+			this.m2 = stage.getMonsters().get(1);
+			this.m3 = stage.getMonsters().get(2);
+			this.mPane1 = new Pane();
+			this.mPane2 = new Pane();
+			this.mPane3 = new Pane();
 			top = drawScreen(mPane1, mPane2, mPane3);
 			drawHero();
 			hero.setMaxMP(hero.getMaxMP() + 5);
@@ -242,21 +270,24 @@ public class BattleField extends Pane {
 			hero.setMana(hero.getMaxMP());
 			hero.setHealth(hero.getMaxHp());
 		}
+		hero.setMana(hero.getMana() + 5);
 		this.attack.setDisable(hero.isDead());
-		this.usePotion.setDisable(hero.isDead());
+		this.usePotion.setDisable(this.potion == 0);
 		this.skill.setDisable(hero.getMana() < hero.getManaCost1() || hero.isDead());
 		this.ultimate.setDisable(hero.getMana() < hero.getManaCost2() || hero.isDead());
 		top = drawScreen(mPane1, mPane2, mPane3);
 		statusPane = drawStatusPane();
-		this.getChildren().addAll(top, statusPane);
+		drawPotionStatus(potionStatus);
+		this.getChildren().addAll(top, statusPane, potionStatus);
 	}
-	
+
 	public void updateMonster() {
-		for(int i=0;i<aliveMonster.size();i++) {
-			if(aliveMonster.get(i).isDead()) aliveMonster.remove(i);
+		for (int i = 0; i < aliveMonster.size(); i++) {
+			if (aliveMonster.get(i).isDead())
+				aliveMonster.remove(i);
 		}
 	}
-	
+
 	public void updateHero(Hero hero) {
 		if (hero instanceof Knight) {
 			mageImage.setVisible(false);
@@ -319,8 +350,16 @@ public class BattleField extends Pane {
 		return ultimate;
 	}
 
+	public int getPotion() {
+		return potion;
+	}
+
+	public void setPotion(int potion) {
+		this.potion = potion;
+	}
+
 	public ArrayList<Monster> getAliveMonster() {
 		return aliveMonster;
 	}
-	
+
 }

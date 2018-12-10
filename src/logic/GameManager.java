@@ -21,10 +21,18 @@ public class GameManager {
 		this.battleField = battleFiled;
 		this.heroSelection.setVisible(false);
 		this.battleField.setVisible(false);
-
 	}
 
 	public void setUpLobbyEvent(Label gameStart) {
+		gameStart.setOnMouseEntered(e -> {
+			gameStart.setText("Begin!!");
+			gameStart.setPrefWidth(375);
+		});
+
+		gameStart.setOnMouseExited(e -> {
+			gameStart.setText("click here to start!!!");
+		});
+
 		gameStart.setOnMouseClicked(e -> {
 			lobby.show(false);
 			heroSelection.show(true);
@@ -53,6 +61,7 @@ public class GameManager {
 
 		usePotion.setOnMouseClicked(e -> {
 			battleField.getHero().usePotion();
+			battleField.setPotion(battleField.getPotion() - 1);
 			int damageDealth = (battleField.getM1().getPower() + battleField.getM2().getPower()
 					+ battleField.getM3().getPower()) / 3;
 			battleField.getHero().setHealth(battleField.getHero().getHealth() - damageDealth);
@@ -79,7 +88,7 @@ public class GameManager {
 		skill.setOnMouseClicked(e -> {
 			Random rand = new Random();
 			int i = rand.nextInt(Integer.MAX_VALUE) % battleField.getAliveMonster().size();
-			int j = (i+1) % battleField.getAliveMonster().size();
+			int j = (i + 1) % battleField.getAliveMonster().size();
 			battleField.getHero().useSkill(battleField.getAliveMonster().get(i), battleField.getAliveMonster().get(j));
 			int damageSum = (battleField.getAliveMonster().get(i).getPower()
 					+ battleField.getAliveMonster().get(j).getPower());

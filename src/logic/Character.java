@@ -1,6 +1,6 @@
 package logic;
 
-public abstract class Character{
+public abstract class Character {
 	private String name;
 	private int health;
 	private int power;
@@ -14,12 +14,14 @@ public abstract class Character{
 	}
 
 	public boolean takeDamage(int damage) {
-		if (this.health == 0) return false;
+		if (this.health == 0)
+			return false;
 		if (this.health < damage) {
 			this.health = 0;
 			return true;
 		}
-		if (damage < 0) damage = 0;
+		if (damage < 0)
+			damage = 0;
 		this.health -= damage;
 		return true;
 	}
@@ -58,7 +60,8 @@ public abstract class Character{
 
 	public void setHealth(int health) {
 		this.health = health;
-		if(health<0) this.health =0;
+		if (health < 0)
+			this.health = 0;
 	}
 
 }

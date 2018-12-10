@@ -1,12 +1,11 @@
 package logic;
 
-public class Knight extends Hero{
+public class Knight extends Hero {
 
 	public Knight() {
-		super("Knight", 150, 10, 100, 10, 50);
+		super("Knight", 150, 15, 100, 10, 50);
 	}
 
-	
 	@Override
 	public boolean useSkill(Character monster1, Character monster2) {
 		if (isDead())
@@ -16,22 +15,20 @@ public class Knight extends Hero{
 		this.setMana(getMana() - 10);
 		return true;
 	}
-	
+
 	@Override
 	public boolean useSkill(Character monster) {
 		if (isDead())
 			return false;
-		monster.takeDamage(100);
+		monster.takeDamage(150);
 		this.setMana(getMana() - 50);
 		return true;
 	}
-
 
 	@Override
 	public boolean useSkill(Character monster1, Character monster2, Character monster3) {
 		return false;
 	}
-
 
 	@Override
 	public boolean attack(Character target) {

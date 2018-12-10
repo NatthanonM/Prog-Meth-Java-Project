@@ -8,12 +8,18 @@ import logic.GameManager;
 import logic.GameStage;
 
 public class Main extends Application {
-	public static Stage primaryStage;
+
+	private static PlaySound sound;
+
 	@Override
 	public void start(Stage primaryStage) {
+
 		Lobby lobby = new Lobby();
 		HeroSelection heroSelection = new HeroSelection();
 		BattleField battleField = new BattleField(new GameStage(1));
+
+		sound = new PlaySound();
+		sound.playNormalSound();
 
 		GameManager gm = new GameManager(lobby, heroSelection, battleField);
 
@@ -32,15 +38,14 @@ public class Main extends Application {
 		primaryStage.setWidth(800);
 		primaryStage.setHeight(600);
 		primaryStage.show();
-
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
-	public void close() {
-		primaryStage.close();
+
+	public static PlaySound getSound() {
+		return sound;
 	}
 
 }

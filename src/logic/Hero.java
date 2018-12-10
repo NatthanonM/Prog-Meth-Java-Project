@@ -26,8 +26,8 @@ public abstract class Hero extends Character implements Attackable {
 		}
 		return true;
 	}
-	
-	public abstract boolean attack(Character target) ;
+
+	public abstract boolean attack(Character target);
 
 	public int getMana() {
 		return mana;
@@ -38,13 +38,13 @@ public abstract class Hero extends Character implements Attackable {
 	}
 
 	public void setMana(int mana) {
-		if( mana >= this.getMaxMP() ) {
+		if (mana >= this.getMaxMP()) {
 			this.mana = this.getMaxMP();
 		} else {
 			this.mana = mana;
 		}
 	}
-	
+
 	public int getMaxMP() {
 		return maxMP;
 	}
@@ -58,8 +58,8 @@ public abstract class Hero extends Character implements Attackable {
 	}
 
 	public abstract boolean useSkill(Character monster);
-	
+
 	public abstract boolean useSkill(Character monster1, Character monster2);
-	
+
 	public abstract boolean useSkill(Character monster1, Character monster2, Character monster3);
 }

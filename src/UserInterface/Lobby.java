@@ -18,7 +18,7 @@ public class Lobby extends StackPane {
 	public Lobby() {
 		super();
 		Pane bg = new Pane();
-		background = new ImageView(new Image(ClassLoader.getSystemResource("images/forest.png").toString()));
+		background = new ImageView(new Image(ClassLoader.getSystemResource("images/lobby.png").toString()));
 		bg.getChildren().add(background);
 
 		VBox vbox = new VBox();
@@ -27,14 +27,14 @@ public class Lobby extends StackPane {
 
 		gameName = new Label();
 		gameName.setText("Monster Defeated");
-		gameName.setStyle("-fx-font-size: 84px");
-		gameName.setTextFill(Paint.valueOf("#00f6ff"));
+		gameName.setStyle("-fx-font-size: 84px; -fx-font-weight: bold");
+		gameName.setTextFill(Paint.valueOf("#00fff0"));
 		gameName.setAlignment(Pos.CENTER);
 
 		gameStart = new Label();
 		gameStart.setText("click here to start!!!");
-		gameStart.setStyle("-fx-font-size: 40px;");
-		gameStart.setTextFill(Paint.valueOf("#3fff00"));
+		gameStart.setStyle("-fx-font-size: 40px; -fx-font-weight: bold");
+		gameStart.setTextFill(Paint.valueOf("#ff0000"));
 		gameStart.setAlignment(Pos.CENTER);
 		gameStart.setCursor(Cursor.HAND);
 
